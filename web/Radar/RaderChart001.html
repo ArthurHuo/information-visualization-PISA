@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html ng-app="RadarChart">
+
+<head>
+    <style>
+        *{ margin:0; padding:0; list-style:none;}
+        img{ border:0;}
+
+        .header{ width:100%; background:#F5F5F5;margin-bottom: 10px}
+        .nav{ width:1000px; margin:0 auto; overflow:hidden;}
+        .nav ul li{ height:40px; line-height:40px; float:left; padding:10px 5px; margin:0px 5px;position:relative;}
+        .nav ul li a{ color:#666; font-family:'Microsoft Yahei'; font-size:14px; text-decoration:none;}
+        .nav ul li a:hover{ color:#000; text-decoration:none;}
+        .nav ul li span{ display:block; position:absolute; width:0px; height:0px; background:#1FAEFF; top:58px; left:50%;}
+    </style>
+    <meta charset="utf-8">
+    <title>PISA 2012 Results Visualization</title>
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css" />-->
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" />-->
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" />-->
+    <link rel="stylesheet" href="style.css" />
+</head>
+<div class="header">
+    <div class="nav">
+        <ul>
+            <li><a href='../index.html'>Home</a><span></span></li>
+            <li><a href='../Map/WorldMap.html'>World Map</a><span></span></li>
+            <li><a href='../Bar/BarChart.html'>Bar Chart</a><span></span></li>
+            <li><a href='RaderChart001.html'>Radar Chart</a><div style="display:block; position:absolute; width:100%; left:0;right:0;height:2px; background:#1FAEFF; top:58px; "></div></li>
+            <li><a href=''>Scatter Plot</a><span></span></li>
+        </ul>
+    </div>
+</div>
+<body class="container" ng-controller="MainCtrl as radar">
+
+
+
+<!-- header -->
+<header class="page-header">
+    <h1>D3 Radar Chart</h1>
+    <p class="text-small">AngularJS application showcasing an interactive D3 radar chart (with facetting).</p>
+</header>
+
+
+<!-- main content -->
+<div class="main container">
+    <h2>Visualization</h2>
+
+    <!-- visualization -->
+    <div class="visualization col-xs-7">
+        <p>Select example:
+            <select ng-options="example for example in radar.examples" ng-model="radar.exampleSelected" ng-change="radar.selectExample(radar.exampleSelected)"></select>
+        </p>
+        <div class="visualization">
+            <radar csv="radar.csv" config="radar.config"></radar>
+        </div>
+    </div>
+
+
+    <!-- configuration -->
+    <div class="configuration col-xs-5">
+        <form>
+            <h3>Configuration Parameters</h3>
+            <div class="form-group">
+                <label>Width:</label>
+                <input type="number" class="form-control-inline" step="50" ng-model="radar.config.w" />
+                <label>Height:</label>
+                <input type="number" class="form-control-inline" step="50" ng-model="radar.config.h" />
+            </div>
+            <div class="form-group">
+                <label>Levels:</label>
+                <input type="number" class="form-control-inline" step="1" ng-model="radar.config.levels" />
+            </div>
+            <div class="form-group">
+                <label>Padding Scale:</label>
+                <input type="number" class="form-control-inline" step="0.1" ng-model="radar.config.facetPaddingScale" />
+            </div>
+            <div class="form-group">
+                <label>Label Scale:</label>
+                <input type="number" class="form-control-inline" step="0.1" ng-model="radar.config.labelScale" />
+            </div>
+            <div class="form-group">
+                <label class="checkbox"><input type="checkbox" ng-model="radar.config.facet" /><span class="text-primary">Facet Plot</span></label>
+                <label class="checkbox"><input type="checkbox" ng-model="radar.config.showLevels" />Levels</label>
+                <label class="checkbox"><input type="checkbox" ng-model="radar.config.showAxes" />Axes</label>
+                <label class="checkbox"><input type="checkbox" ng-model="radar.config.showVertices" />Vertices</label>
+                <label class="checkbox"><input type="checkbox" ng-model="radar.config.showPolygons" />Polygons</label>
+                <label class="checkbox"><input type="checkbox" ng-model="radar.config.showLegend" />Legend</label>
+                <label class="checkbox"><input type="checkbox" ng-model="radar.config.showLevelsLabels" />Levels Labels</label>
+                <label class="checkbox"><input type="checkbox" ng-model="radar.config.showAxesLabels" />Axes Labels</label>
+            </div>
+            <p class="text-muted">(NOTE: Not all configuration options are shown, refer to <code>README.md</code> or <code>radarDraw.js</code> for more details)</p>
+        </form>
+    </div>
+</div>
+<hr />
+
+
+<!-- description -->
+<div class="description">
+    <p>A radar chart visualizes multivariate data in a 2D chart of three or more quantitative variables represented on axes. Use the configuration parameters above to adjust the plot to your tastes, and you can also choose to view the plots stacked vs facetted.</p>
+
+</div>
+<hr/>
+
+
+
+
+
+
+
+
+<script>
+    $(function(){
+        $('.nav li').hover(function(){
+            $('span',this).stop().css('height','2px');
+            $('span',this).animate({
+                left:'0',
+                width:'100%',
+                right:'0'
+            },200);
+        },function(){
+            $('span',this).stop().animate({
+                left:'50%',
+                width:'0'
+            },200);
+        });
+    });
+</script>
+
+
+<!-- scripts -->
+<script src="angular.min.js"></script>
+<script src="d3.min.js"></script>
+<script src="app.js"></script>
+<script src="radar.js"></script>
+<script src="radarDraw.js"></script>
+
+<script>
+    // Hack to make this example display correctly in an iframe on bl.ocks.org
+    d3.select(self.frameElement).style("height", "1000px");
+</script>
+</body>
+
+</html>

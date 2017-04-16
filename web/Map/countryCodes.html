@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="file:///E:/Java/IDEAworkspace/SWEN439/web/d3.min.js"></script>
+<script src="file:///E:/Java/IDEAworkspace/SWEN439/web/topojson.js"></script>
+<!-- I recommend you host this file on your own, since this will change without warning -->
+<script src="file:///E:/Java/IDEAworkspace/SWEN439/web/datamaps.world.min.js?v=1"></script>
+<h2>World Map</h2>
+
+<div id="container1" style="position: relative; width: 80%; max-height: 1000px;"></div>
+
+
+<script>
+    //basic map config with custom fills, mercator projection
+//    var map = new Datamap({
+//        scope: 'world',
+//        element: document.getElementById('container1'),
+//        geographyConfig: {
+//            highlightOnHover: true,
+//            popupOnHover: true
+//        },
+//        projection: 'mercator',
+//        height: 800,
+//        fills: {
+//            defaultFill: '#f0af0a',
+//            lt50: 'rgba(0,244,244,0.9)',
+//            gt50: 'red'
+//        },
+//
+//        data: {
+//            USA: {fillKey: 'lt50' },
+//            RUS: {fillKey: 'lt50' },
+//            CAN: {fillKey: 'lt50' },
+//            BRA: {fillKey: 'gt50' },
+//            ARG: {fillKey: 'gt50'},
+//            COL: {fillKey: 'gt50' },
+//            AUS: {fillKey: 'gt50' },
+//            ZAF: {fillKey: 'gt50' },
+//            MAD: {fillKey: 'gt50' }
+//        }
+//    })
+//    map.legend();
+    var countries = Datamap.prototype.worldTopo.objects.world.geometries;
+    for (var i = 0, j = countries.length; i < j; i++) {
+//        console.log(countries[i].properties);
+        console.log(countries[i].id);
+    }
+
+</script>
+</body>

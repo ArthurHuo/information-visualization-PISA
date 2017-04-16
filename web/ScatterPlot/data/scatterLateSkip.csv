@@ -1,0 +1,69 @@
+Country,LateForSchool,SkipWholeDay,SkipClass,Score
+Albania,.55,.21,.27,18.07
+United Arab Emirates,.59,.61,.40,22.91
+Argentina,1.08,1.08,.75,18.82
+Australia,.73,.53,.25,30.16
+Austria,.37,.10,.16,30.53
+Belgium,.47,.09,.13,31.66
+Bulgaria,1.27,.46,.61,24.10
+Brazil,.62,.31,.28,17.00
+Canada,.78,.31,.36,31.44
+Switzerland,.42,.08,.15,31.36
+Chile,1.01,.10,.20,24.75
+Colombia,.56,.05,.19,18.11
+Costa Rica,1.19,.49,.71,20.05
+Czech Republic,.45,.10,.10,32.59
+Germany,.33,.07,.11,31.58
+Denmark,.84,.17,.25,28.19
+Spain,.68,.33,.49,29.85
+Estonia,.79,.25,.51,33.49
+Finland,.90,.16,.25,31.22
+France,.54,.16,.25,30.24
+United Kingdom,.60,.31,.21,29.90
+Greece,1.20,.38,.80,25.50
+Hong Kong-China,.21,.05,.04,36.26
+Croatia,.57,.25,.40,27.54
+Hungary,.39,.10,.12,29.09
+Indonesia,.42,.17,.34,15.97
+Ireland,.48,.06,.19,31.65
+Iceland,.57,.04,.17,28.05
+Israel,1.07,.45,.50,26.95
+Italy,.58,.63,.48,29.55
+Jordan,.74,.63,.46,17.41
+Japan,.13,.02,.05,35.06
+Kazakhstan,.43,.29,.25,20.78
+Korea,.50,.04,.05,35.96
+Liechtenstein,.26,.05,.09,33.92
+Lithuania,.83,.28,.50,28.14
+Luxembourg,.53,.13,.12,28.81
+Latvia,1.23,.34,1.17,29.99
+Macao-China,.38,.06,.08,33.62
+Mexico,.62,.25,.28,20.60
+Montenegro,.70,.44,.49,19.23
+Malaysia,.65,.46,.39,19.82
+Netherlands,.55,.05,.16,31.98
+Norway,.53,.11,.18,29.25
+New Zealand,.82,.30,.25,31.24
+Peru,1.00,.22,.16,15.58
+Poland,.90,.24,.33,32.85
+Portugal,1.05,.34,.46,28.26
+Qatar,.79,.27,.34,16.70
+China-Shanghai,.28,.01,.05,41.49
+Perm(Russian Federation),1.31,.37,.66,28.12
+Florida (USA),.58,.39,.26,27.26
+Connecticut (USA),.50,.21,.17,31.42
+Massachusetts (USA),.41,.24,.13,31.80
+Romania,.92,.61,.76,23.35
+Russian Federation,1.04,.40,.53,27.82
+Singapore,.33,.21,.18,36.77
+Serbia,.79,.21,.40,23.84
+Slovak Republic,.45,.15,.17,27.57
+Slovenia,.78,.30,.46,27.84
+Sweden,1.20,.11,.32,27.86
+Chinese Taipei,.46,.09,.17,35.17
+Thailand,.62,.28,.36,23.79
+Tunisia,.93,.34,.38,17.74
+Turkey,.85,1.16,.90,25.16
+Uruguay,1.26,.39,.37,20.09
+United States of America,.54,.29,.20,28.83
+Vietnam,.22,.12,.09,32.62

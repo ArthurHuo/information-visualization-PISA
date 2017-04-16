@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="file:///E:/Java/IDEAworkspace/SWEN439/web/d3.min.js"></script>
+<script src="file:///E:/Java/IDEAworkspace/SWEN439/web/topojson.js"></script>
+<!-- I recommend you host this file on your own, since this will change without warning -->
+<script src="file:///E:/Java/IDEAworkspace/SWEN439/web/datamaps.world.min.js"></script>
+<h2>World Map</h2>
+
+<div id="container1" style="position: relative; width: 80%; max-height: 500px;"></div>
+
+
+<script>
+    //basic map config with custom fills, mercator projection
+    var map = new Datamap({
+        scope: 'countries',
+        element: document.getElementById('container1'),
+        geographyConfig: {
+            dataUrl: 'world-topo-min.json',
+//            'defaultFill': '#D7D7D7',
+//            'blue': '#7dc8eb',
+//            'noData': '#9c9c9c',
+//            'selected': '#38a9de',
+            'highlightOnHover': true,
+//            'highlightFillColor': '#1E7FD6',
+//            'highlightBorderColor': '#efefef',
+//            'borderColor': '#FFFFFF',
+            'popupOnHover': true,
+//            popupTemplate: function(geography, data) {
+//                console.log(data);
+//                var popup = createDiv(geography.properties.name, data);
+//                return popup;
+//            }
+        },
+
+//        projection: 'mercator',
+        setProjection: function(element) {
+            var projection = d3.geo.equirectangular()
+                    .center([0, 20])
+                    .rotate([0, 0])
+                    .scale(200)
+                    .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+            var path = d3.geo.path()
+                    .projection(projection);
+
+            return {path: path, projection: projection};
+        },
+        height: 800,
+        fills: {
+            defaultFill: '#f0af0a',
+            lt50: 'rgba(0,244,244,0.9)',
+            gt50: 'red'
+        },
+        done: function(datamap) {
+            datamap.svg.call(d3.behavior.zoom().on("zoom", redraw));
+
+            function redraw() {
+                datamap.svg.selectAll("g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+            }
+        },
+
+        data: {
+            192: {fillKey: 'lt50' },
+            RUS: {fillKey: 'lt50' },
+            CAN: {fillKey: 'lt50' },
+            BRA: {fillKey: 'gt50' },
+            ARG: {fillKey: 'gt50'},
+            COL: {fillKey: 'gt50' },
+            AUS: {fillKey: 'gt50' },
+            ZAF: {fillKey: 'gt50' },
+            MAD: {fillKey: 'gt50' }
+        }
+    })
+//    map.legend();
+
+
+</script>
+</body>

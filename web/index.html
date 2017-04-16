@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>PISA 2012 Results Visualization</title>
+    <style>
+        *{ margin:0; padding:0; list-style:none;}
+        img{ border:0;}
+
+        .header{ width:100%; background:#F5F5F5;}
+        .nav{ width:1000px; margin:0 auto; overflow:hidden;}
+        .nav ul li{ height:40px; line-height:40px; float:left; padding:10px 5px; margin:0px 5px;position:relative;}
+        .nav ul li a{ color:#666; font-family:'Microsoft Yahei'; font-size:14px; text-decoration:none;}
+        .nav ul li a:hover{ color:#000; text-decoration:none;}
+        .nav ul li span{ display:block; position:absolute; width:0px; height:0px; background:#1FAEFF; top:58px; left:50%;}
+    </style>
+
+</head>
+<body>
+<!-- 代码begin -->
+<div class="header">
+    <div class="nav">
+        <ul>
+            <li><a href='index.html'>Home</a><div style="display:block; position:absolute; width:100%; left:0;right:0;height:2px; background:#1FAEFF; top:58px; "></div></li>
+            <li><a href='Map/WorldMap.html'>World Map</a><span></span></li>
+            <li><a href='Bar/BarChart.html'>Bar Chart</a><span></span></li>
+            <li><a href='Radar/RaderChart.html'>Radar Chart</a><span></span></li>
+            <li><a href='ScatterPlot/ScatterPlot.html'>Scatter Plot</a><span></span></li>
+        </ul>
+    </div>
+</div>
+
+<div id="pageContent" class="clear span-24 last" style="margin-left: 140px; margin-top:40px;">
+
+    <div id="webEditContent" class="document">
+        <div class="span-24 last mainhome" id="home">
+            <div class="block clearfix">
+                <h2><span>About PISA<br /></span></h2>
+                <table border="0">
+                    <tbody>
+                    <tr>
+                        <td style="width: 50%;">
+                            <p>The Programme for International Student Assessment (PISA) is a triennial international survey which aims to evaluate education systems worldwide by testing the skills and knowledge of 15-year-old students. To date, students representing more than 70 economies</a>&nbsp;have participated in the assessment.</p>
+                            <p>The most recently published results are from the assessment in 2012.&nbsp;</p>
+                            <p>Around 510,000 students in 65 economies</a>&nbsp;took part in the PISA 2012 assessment of reading, mathematics and science representing about 28 million 15-year-olds globally. Of those economies, 44 took part in an assessment of creative problem solving and 18 in an assessment of financial literacy.</p>
+
+                            <p>More than 70 economies have signed up to take part in the assessment in 2015 which will focus on science.</p>
+
+                        </td>
+                        <td>&nbsp;<object height="189" width="336"><param name="movie" value="//www.youtube.com/v/q1I9tuScLUA?version=3&amp;hl=en_US" /><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><embed allowfullscreen="true" allowscriptaccess="always" height="189" src="//www.youtube.com/v/q1I9tuScLUA?version=3&amp;hl=en_US" type="application/x-shockwave-flash" width="336" /></object></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h2>What makes PISA different</h2>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>PISA is unique because it develops tests which are not directly linked to the school curriculum. The tests are designed to assess to what extent students at the end of compulsory education, can apply their knowledge to real-life situations and be equipped for full participation in society. The information collected through background questionnaires also provides context which can help analysts interpret the results.</p>
+                            <p>In addition, given PISA is an ongoing triennial survey, countries and economies participating in successive surveys can compare their students' performance over time and assess the impact of education policy decisions.</p>
+                            <p>&nbsp;</p>
+                            <p>&nbsp;</p>
+                        </td>
+                        </tr>
+                    <tr>
+                        <td>
+                            <h2>What the assessment involves</h2>
+                            <p>Since the year 2000, every three years, fifteen-year-old students from randomly selected schools worldwide take tests in the key subjects: reading, mathematics and science, with a focus on one subject in each year of assessment.&nbsp;In 2012, some economies also participated in the optional assessments of Problem Solving ;and Financial Literacy.&nbsp;</p>
+                            <p>Students take a test that lasts 2 hours. The tests are a mixture of open-ended and multiple-choice questions that are organised in groups based on a passage setting out a real-life situation. A total of about 390 minutes of test items are covered. &nbsp;Students take different combinations of different tests.</p>
+                            <p>The students and their school principals also answer questionnaires to provide information about the students' backgrounds, schools and learning experiences and about the broader school system and learning environment.</p>
+                            <p>&nbsp;</p>
+                            <p>&nbsp;</p>
+                            <p><span>&nbsp;</span></p>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+<script src="jquery.min.js"></script>
+<script>
+    $(function(){
+        $('.nav li').hover(function(){
+            $('span',this).stop().css('height','2px');
+            $('span',this).animate({
+                left:'0',
+                width:'100%',
+                right:'0'
+            },200);
+        },function(){
+            $('span',this).stop().animate({
+                left:'50%',
+                width:'0'
+            },200);
+        });
+    });
+</script>
+<!-- 代码end -->
+<!--<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">-->
+    <!--<p>适用浏览器：IE8、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. </p>-->
+    <!--<p>来源：<a href="http://sc.chinaz.com/" target="_blank">站长素材</a></p>-->
+<!--</div>-->
+</body>
+</html>

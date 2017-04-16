@@ -1,0 +1,182 @@
+<html>
+<head>
+    <style>
+        *{ margin:0; padding:0; list-style:none;}
+        img{ border:0;}
+
+        .header{ width:100%; background:#F5F5F5;margin-bottom: 10px}
+        .nav{ width:1000px; margin:0 auto; overflow:hidden;}
+        .nav ul li{ height:40px; line-height:40px; float:left; padding:10px 5px; margin:0px 5px;position:relative;}
+        .nav ul li a{ color:#666; font-family:'Microsoft Yahei'; font-size:14px; text-decoration:none;}
+        .nav ul li a:hover{ color:#000; text-decoration:none;}
+        .nav ul li span{ display:block; position:absolute; width:0px; height:0px; background:#1FAEFF; top:58px; left:50%;}
+    </style>
+    <title>PISA 2012 Results Visualization</title>
+</head>
+<body>
+
+<div class="header">
+    <div class="nav">
+        <ul>
+            <li><a href='../index.html'>Home</a><span></span></li>
+            <li><a href='../Map/WorldMap.html'>World Map</a><span></span></li>
+            <li><a href='../Bar/BarChart.html'>Bar Chart</a><span></span></li>
+            <li><a href='../Radar/RaderChart.html'>Radar Chart</a><span></span></li>
+            <li><a href='ScatterPlot.html'>Scatter Plot</a><div style="display:block; position:absolute; width:100%; left:0;right:0;height:2px; background:#1FAEFF; top:58px; "></div></li>
+        </ul>
+    </div>
+</div>
+<h1 style="margin-bottom: 10px">PISA 2012 Results Visualization - Scatter Plot</h1>
+
+<div id="chartContainer">
+</div>
+
+<div style="width:40%;position:absolute;left:60%;top:25%;text-align:left;">
+    <div style="margin-bottom: 10px;">
+        <!--<button href="javascript:allCheck('choice',true)">Select All</button>-->
+        <!--<button href="javascript:allCheck('choice',false)">Unselect All</button>-->
+        <!--<button href="javascript:reserveCheck('choice')">Invert</button>-->
+        <!--<button name="clear" id="clear">Clear</button>-->
+        <div>
+            Select data for axis X:
+            <select id="selectX" style="margin-bottom: 10px" onchange="changeX()">
+                <option value="lateForSchool">Late For School</option>
+
+                <option value="skipWholeDay">Skip Whole Days</option>
+                <option value="skipSomeClasses">Skip Some Classes</option>
+                <option value="books">BooksAtHome</option>
+            </select>
+        </div>
+        <div>
+            Select data for axis Y:
+            <select id="selectY" style="margin-bottom: 10px" onchange="changeY()">
+                <option value="score">Score</option>
+
+                <!--<option value="a_math">Average Score - Mathematics</option>-->
+                <!--<option value="a_read">Average Score - Reading</option>-->
+                <!--<option value="a_scie">Average Score - Science</option>-->
+            </select>
+        </div>
+
+
+    </div>
+
+</div>
+
+</body>
+<script src="d3.min.js"></script>
+<script src="dimple.v2.1.6.min.js"></script>
+<script src="../jquery.min.js"></script>
+<script>
+    $(function(){
+        $('.nav li').hover(function(){
+            $('span',this).stop().css('height','2px');
+            $('span',this).animate({
+                left:'0',
+                width:'100%',
+                right:'0'
+            },200);
+        },function(){
+            $('span',this).stop().animate({
+                left:'50%',
+                width:'0'
+            },200);
+        });
+    });
+
+    var svg = dimple.newSvg("#chartContainer", 800, 600);
+    //        d3.tsv("example_data.tsv", function (data) {
+    //            data = dimple.filterData(data, "Date", "01/12/2012");
+    //            var myChart = new dimple.chart(svg, data);
+    //            myChart.setBounds(60, 30, 500, 330)
+    //            myChart.addMeasureAxis("x", "Unit Sales");
+    //            myChart.addMeasureAxis("y", "Operating Profit");
+    //            myChart.addSeries(["SKU", "Channel"], dimple.plot.bubble);
+    //            myChart.addLegend(200, 10, 360, 20, "right");
+    //            myChart.draw();
+    //        });
+    var myChart;
+    var axisX;
+    var axisY;
+    d3.csv("data/scatterBooks.csv", function (data) {
+//            data = dimple.filterData(data, "Date", "01/12/2012");
+        myChart = new dimple.chart(svg, data);
+        myChart.setBounds(120, 30, 600, 430)
+        axisX = myChart.addMeasureAxis("x", "LateForSchool");
+        axisY = myChart.addMeasureAxis("y", "Score");
+        myChart.addSeries(["Country"], dimple.plot.bubble);
+//            myChart.addLegend(200, 10, 360, 20, "right");
+        myChart.draw();
+    });
+
+
+    function changeX(){
+        var objS = document.getElementById("selectX");
+        var op = objS.options[objS.selectedIndex].value;
+        if(op == "lateForSchool"){
+            x_lateForSchool();
+//            removeMap();
+//            showAverage("map");
+        }else if(op == "skipWholeDay"){
+            x_skipWholeDay();
+        }else if(op =="skipSomeClasses"){
+            x_skipSomeClasses();
+//            removeMap();
+//            showDetailAverage(op);
+        }else if(op == "books"){
+            x_books();
+//            removeMap();
+//            showDetailAverage(op);
+        }else if(op == "a_scie"){
+//            removeMap();
+//            showDetailAverage(op);
+        }
+    }
+
+    function changeY(){
+        var objS = document.getElementById("selectY");
+        var op = objS.options[objS.selectedIndex].value;
+        if(op == "Score"){
+            y_score();
+//            x_lateForSchool();
+//            removeMap();
+//            showAverage("map");
+        }else if(op == "skipWholeDay"){
+//            x_skipWholeDay();
+        }else if(op =="skipSomeClasses"){
+//            x_skipSomeClasses();
+//            removeMap();
+//            showDetailAverage(op);
+        }else if(op == "a_read"){
+//            removeMap();
+//            showDetailAverage(op);
+        }else if(op == "a_scie"){
+//            removeMap();
+//            showDetailAverage(op);
+        }
+    }
+
+
+    function x_skipWholeDay(){
+        axisX.measure = "SkipWholeDay";
+        myChart.draw(1000);
+    }
+    function x_skipSomeClasses(){
+        axisX.measure = "SkipClass";
+        myChart.draw(1000);
+    }
+    function x_lateForSchool(){
+        axisX.measure = "LateForSchool";
+        myChart.draw(1000);
+    }
+    function x_books(){
+        axisX.measure = "Books";
+        myChart.draw(1000);
+    }
+
+    function y_socre(){
+        axisY.measure = "Score";
+        myChart.draw(1000);
+    }
+</script>
+</html>

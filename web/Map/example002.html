@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--<style>-->
+        <!--.active { fill: blue !important;}-->
+        <!--/*.datamaps-key dt, .datamaps-key dd {float: none !important;}-->
+        <!--.datamaps-key {right: -50px; top: 0;}*/-->
+    <!--</style>-->
+    <style>
+
+
+        .download {
+            background: #333;
+            color: #FFF;
+            font-weight: 900;
+            border: 2px solid #B10000;
+            padding: 4px;
+            margin:4px;
+        }
+
+        #TitleContainer{
+            position: absolute;
+            width: 100%;
+            height: 30px;
+            top:0px;
+            left: 0;
+            background-color:#FAFAFA;
+        }
+
+        .mainTitleText{
+            font-size:12px;
+            font-family:"Helvetica Neue","Helvetica";
+        }
+
+        #CreditsContainer{
+            position: absolute;
+            width: 100%;
+            height: 36px;
+            bottom:0px;
+            left: 0;
+            background-color:#FAFAFA;
+
+        }
+
+
+
+        #map {
+            position: absolute;
+            height: 500px;
+            width: 80%;
+            margin:10%;
+
+            top: 0; bottom: 0; right: 0; left: 0; /*fill parent*/
+            background-color:#ECF6FC; /*hellblau*/
+        }
+        /*#root {*/
+            /*position: absolute;*/
+            /*height: 500px;*/
+            /*width: 80%;*/
+            /*margin:10px 5%;*/
+            /*top: 80px; bottom: 0; right: 0; left: 0; /!*fill parent*!/*/
+            /*/!*background-color:#ECF6FC; /!*hellblau*!/!*/
+        /*}*/
+
+
+    </style>
+</head>
+<body>
+
+<!--<div id="container1" style="border:1px dotted blue; width: 80%; height: 600px; position: relative;"></div>-->
+
+<script src="file:///E:/Java/IDEAworkspace/SWEN439/web/d3.min.js"></script>
+<script src="file:///E:/Java/IDEAworkspace/SWEN439/web/topojson.js"></script>
+<script src="file:///E:/Java/IDEAworkspace/SWEN439/web/datamaps.world.min.js"></script>
+<script src="file:///E:/Java/IDEAworkspace/SWEN439/web/colorbrewer.js"></script>
+
+<h1>PISA 2012 Results - World Map</h1>
+
+<select id="selectMap" onchange="changeMap()">
+    <option value="show">Show Average Score</option>
+    <option value="hide">Hide Average Score</option>
+</select>
+<!--<button id="showAverage" onclick="showAverage(this)">Show Average Score</button>-->
+<!--<button id="hideAverage" onclick="hideAverage(this)">Hide Average Score</button>-->
+
+<div id="root" >
+
+    <!--<div id="map" style=" width: 80%;margin:10px 5%;"> </div>-->
+    <!--<div>    <svg id="CreditsContainer"></svg>  </div>-->
+    <!--<div>    <svg id="TitleContainer"></svg>  </div>-->
+</div>
+<script>
+//    d3.csv("gdpPerCapita2011_PWTrgdpe.csv", function(error, csvdata1) {
+//
+//    });
+    // example data from server
+//    var series = [
+//        ["BLR",75],["BLZ",43],["RUS",50],["RWA",88],["SRB",21],["TLS",43],
+//        ["REU",21],["TKM",19],["TJK",60],["ROU",4],["TKL",44],["GNB",38],
+//        ["GUM",67],["GTM",2],["SGS",95],["GRC",60],["GNQ",57],["GLP",53],
+//        ["JPN",59],["GUY",24],["GGY",4],["GUF",21],["GEO",42],["GRD",65],
+//        ["GBR",14],["GAB",47],["SLV",15],["GIN",19],["GMB",63],["GRL",56],
+//        ["ERI",57],["MNE",93],["MDA",39],["MDG",71],["MAF",16],["MAR",8],
+//        ["MCO",25],["UZB",81],["MMR",21],["MLI",95],["MAC",33],["MNG",93],
+//        ["MHL",15],["MKD",52],["MUS",19],["MLT",69],["MWI",37],["MDV",44],
+//        ["MTQ",13],["MNP",21],["MSR",89],["MRT",20],["IMN",72],["UGA",59],
+//        ["TZA",62],["MYS",75],["MEX",80],["ISR",77],["FRA",54],["IOT",56],
+//        ["SHN",91],["FIN",51],["FJI",22],["FLK",4],["FSM",69],["FRO",70],
+//        ["NIC",66],["NLD",53],["NOR",7],["NAM",63],["VUT",15],["NCL",66],
+//        ["NER",34],["NFK",33],["NGA",45],["NZL",96],["NPL",21],["NRU",13],
+//        ["NIU",6],["COK",19],["XKX",32],["CIV",27],["CHE",65],["COL",64],
+//        ["CHN",16],["CMR",70],["CHL",15],["CCK",85],["CAN",76],["COG",20],
+//        ["CAF",93],["COD",36],["CZE",77],["CYP",65],["CXR",14],["CRI",31],
+//        ["CUW",67],["CPV",63],["CUB",40],["SWZ",58],["SYR",96],["SXM",31]];
+//    // Datamaps expect data in format:
+//    // { "USA": { "fillColor": "#42a844", numberOfWhatever: 75},
+//    //   "FRA": { "fillColor": "#8dc386", numberOfWhatever: 43 } }
+//    var dataset = {};
+//    // We need to colorize every country based on "numberOfWhatever"
+//    // colors should be uniq for every value.
+//    // For this purpose we create palette(using min/max series-value)
+//    var onlyValues = series.map(function(obj){ return obj[1]; });
+//    var minValue = Math.min.apply(null, onlyValues),
+//            maxValue = Math.max.apply(null, onlyValues);
+//    // create color palette function
+//    // color can be whatever you wish
+//    var paletteScale = d3.scale.linear()
+//            .domain([minValue,maxValue])
+//            .range(["#EFEFFF","#02386F"]); // blue color
+//    // fill dataset in appropriate format
+//    series.forEach(function(item){ //
+//        // item example value ["USA", 70]
+//        var iso = item[0],
+//                value = item[1];
+//        dataset[iso] = { numberOfThings: value, fillColor: paletteScale(value) };
+//    });
+window.onload=showAverage("map");
+function changeMap(){
+    var objS = document.getElementById("selectMap");
+    var op = objS.options[objS.selectedIndex].value;
+    if(op == "show"){
+        showAverage("map");
+    }else if(op == "hide"){
+        hideAverage("map");
+    }
+}
+
+function hideAverage(id){
+//    document.getElementById('map').remove
+    var parent=document.getElementById("root");
+    var child=document.getElementById("map");
+    parent.removeChild(child);
+}
+function createElement(){
+    var createDiv=document.createElement("div");
+    createDiv.id="map";
+//    createDiv.style.width = "80%";
+//    createDiv.style.margin="10px 5%";
+    var parent=document.getElementById("root");
+    parent.appendChild(createDiv);
+}
+
+
+function showAverage(id){
+    createElement();
+var bucketLimits = [5,10,15,20,25,30,35,40];
+var colorschemeOfThisMap = ['#f7fcfd','#e5f5f9','#ccece6','#99d8c9','#66c2a4','#41ae76','#238b45','#006d2c','#00441b'];
+d3.csv("averagescore.csv", function(error, csvdata1) {
+
+            for (var i=0;i<csvdata1.length;i++)
+            {
+                csvdata1[i].fillKey = {};
+
+                if (csvdata1[i].average_score < bucketLimits[0]) {  csvdata1[i].fillKey = '0'; }
+
+                if (csvdata1[i].average_score >= bucketLimits[0] && csvdata1[i].average_score < bucketLimits[1]) {  csvdata1[i].fillKey = '1'; }
+                if (csvdata1[i].average_score >= bucketLimits[1] && csvdata1[i].average_score < bucketLimits[2]) {  csvdata1[i].fillKey = '2'; }
+                if (csvdata1[i].average_score >= bucketLimits[2] && csvdata1[i].average_score < bucketLimits[3]) {  csvdata1[i].fillKey = '3'; }
+                if (csvdata1[i].average_score >= bucketLimits[3] && csvdata1[i].average_score < bucketLimits[4]) {  csvdata1[i].fillKey = '4'; }
+                if (csvdata1[i].average_score >= bucketLimits[4] && csvdata1[i].average_score < bucketLimits[5]) {  csvdata1[i].fillKey = '5'; }
+                if (csvdata1[i].average_score >= bucketLimits[5] && csvdata1[i].average_score < bucketLimits[6]) {  csvdata1[i].fillKey = '6'; }
+                if (csvdata1[i].average_score >= bucketLimits[6] && csvdata1[i].average_score < bucketLimits[7]) {  csvdata1[i].fillKey = '7'; }
+                if (csvdata1[i].average_score >= bucketLimits[7] ) {  csvdata1[i].fillKey = '8'; }
+
+
+
+                csvdata1[ csvdata1[i].ISO] = csvdata1[i] ;
+                //console.log(csvdata1[i]);
+                delete  csvdata1[i].ISO;
+                delete  csvdata1[i] ;
+            }
+            myMap1.updateChoropleth(csvdata1);
+
+        }
+);
+    // render map
+var myMap1 = new Datamap(
+
+        {
+            scope: 'world',
+            projection: 'equirectangular',
+            element: document.getElementById('map'),
+//            width:document.getElementById('map').clientWidth-10,
+//            height:600,
+            // projection: 'mercator',
+
+
+            fills: {
+                '0': colorschemeOfThisMap[0],
+                '1': colorschemeOfThisMap[1],
+                '2': colorschemeOfThisMap[2],
+                '3': colorschemeOfThisMap[3],
+                '4': colorschemeOfThisMap[4],
+                '5': colorschemeOfThisMap[5],
+                '6': colorschemeOfThisMap[6],
+                '7': colorschemeOfThisMap[7],
+                '8': colorschemeOfThisMap[8],
+                defaultFill: 'grey'
+            },
+            geographyConfig: {
+//                borderColor: '#DEDEDE',
+                borderWidth:0.1,
+//                highlightBorderWidth: 2,
+//                // don't change color on mouse hover
+                highlightFillColor: function(geography) {
+//                    console.log(geography.fillKey);
+                    if(geography['fillKey'] == 0){
+                        return colorschemeOfThisMap[0];
+                    }else if(geography['fillKey'] == 1){
+                        return colorschemeOfThisMap[1];
+                    }else if(geography['fillKey'] == 2){
+                        return colorschemeOfThisMap[2];
+                    }else if(geography['fillKey'] == 3){
+                        return colorschemeOfThisMap[3];
+                    }else if(geography['fillKey'] == 4){
+                        return colorschemeOfThisMap[4];
+                    }else if(geography['fillKey'] == 5){
+                        return colorschemeOfThisMap[5];
+                    }else if(geography['fillKey'] == 6){
+                        return colorschemeOfThisMap[6];
+                    }else if(geography['fillKey'] == 7){
+                        return colorschemeOfThisMap[7];
+                    }else if(geography['fillKey'] == 8){
+                        return colorschemeOfThisMap[8];
+                    }else{
+                        return 'grey';
+                    }
+
+
+
+//                    return geography['fillKey'] || '#F5F5F5';
+                },
+//                // only change border
+//                highlightBorderColor: '#B7B7B7',
+//                borderWidth: 0.2,
+//                borderColor: '#4F4F4F',
+                highlightBorderColor: 'black',
+                highlightBorderWidth: 0.5,
+//                 highlightFillColor: '#FFEC38',
+
+                highlightOnHover: true,
+                popupOnHover: true, //disable the popup while hovering
+
+                popupTemplate: function(geography, csvdata1) {
+                    if ( !csvdata1 ) return;  // makes sure that the tooltip is shown only if there is data
+                    return '<div class="hoverinfo">' + geography.properties.name + '<br> Average Score: <strong>' +  csvdata1.average_score+ '</strong> ';},
+            },
+            data: {},
+            done: function(datamap) {
+                datamap.svg.call(d3.behavior.zoom().on("zoom", redraw));
+
+                function redraw() {
+                    datamap.svg.selectAll("g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+                }
+            }
+
+
+        });
+//    myMap1.legend();
+myMap1.legend({
+//        legendTitle : "Average Score",
+        defaultFillName: "No data",
+        labels: {
+            0: ">0",
+            1: ">5",
+            2: ">10",
+            3: ">15",
+            4: ">20",
+            5: ">25",
+            6: ">30",
+            7: ">35",
+            8: ">40"
+        }
+    });
+
+//    var map = new Datamap({
+//        element: document.getElementById('container1'),
+////        setProjection: function(element) {
+////            var projection = d3.geo.equirectangular()
+////                    .center([23, -3])
+////                    .rotate([4.4, 0])
+////                    .scale(400)
+////                    .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+////            var path = d3.geo.path()
+////                    .projection(projection);
+////
+////            return {path: path, projection: projection};
+////        },
+//        projection: 'mercator', // big world map
+//        // countries don't listed in dataset will be painted with this color
+//        //fills: { defaultFill: '#F5F5F5' },
+//        fills: {
+//            defaultFill: "#cccccc",
+//            q0: "rgb(242,242,242)",
+//            q1: "rgb(173,186,206)",
+//            q2: "rgb(132,152,181)",
+//            q3: "rgb(90,117,156)",
+//            q4: "rgb(49,83,132)",
+//            q5: "rgb(8,48,107)",
+//        },
+//        data: dataset,
+//        geographyConfig: {
+//            borderColor: '#DEDEDE',
+//            highlightBorderWidth: 2,
+//            // don't change color on mouse hover
+//            highlightFillColor: function(geo) {
+//                return geo['fillColor'] || '#F5F5F5';
+//            },
+//            // only change border
+//            highlightBorderColor: '#B7B7B7',
+//            // show desired information in tooltip
+//            popupTemplate: function(geo, data) {
+//                // don't show tooltip if country don't present in dataset
+//                if (!data) { return ; }
+//                // tooltip content
+//                return ['<div class="hoverinfo">',
+//                    '<strong>', geo.properties.name, '</strong>',
+//                    '<br>Count: <strong>', data.numberOfThings, '</strong>',
+//                    '</div>'].join('');
+//            }
+//        },
+//        done: function(datamap) {
+//            datamap.svg.call(d3.behavior.zoom().on("zoom", redraw));
+//
+//            function redraw() {
+//                datamap.svg.selectAll("g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+//            }
+//        }
+//    });
+//    //map.legend();
+//    map.legend({
+//        legendTitle : "Total Downloads",
+//        defaultFillName: "No data",
+//        labels: {
+//            q0: "one",
+//            q1: "two",
+//            q2: "three",
+//            q3: "four",
+//            q4: "five",
+//            q5: "six,"
+//        }
+//    });
+}
+</script>
+
+</body>
+</html>

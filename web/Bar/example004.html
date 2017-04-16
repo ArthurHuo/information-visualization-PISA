@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<script src="file:///E:/Java/IDEAworkspace/SWEN439/web/d3.min.js"></script>
+<script src="dimple.v2.1.6.min.js"></script>
+
+<h1>PISA 2012 Results - Bar Chart</h1>
+
+<button id="btn_all">All</button>
+<button id="btn_math">Mathematics Only</button>
+<button id="btn_read">Reading Only</button>
+<button id="btn_scie">Science Only</button>
+
+<div id="chartContainer">
+</div>
+<script type="text/javascript">
+    var svg = dimple.newSvg("#chartContainer", 1200, 8000);
+    var myChart;
+    d3.csv("barScoreAverage.csv", function (data) {
+        myChart = new dimple.chart(svg, data);
+            myChart.setBounds(200, 30, 800, 800);
+//        myChart.setMargins("200px", "200px", "200px", "200px");
+        myChart.addMeasureAxis("x", "average_score");
+        var y = myChart.addCategoryAxis("y", "country");
+        y.addOrderRule("average_score");
+        var mySeries = myChart.addSeries("Channel", dimple.plot.bar);
+        myChart.addLegend(360, 10, 510, 20, "left");
+//            myChart.assignColor("#2ca25f","#f03b20","#756bb1","#d95f0e");
+//            myChart.assignColor("Hypermarkets", "#2ca25f");
+//            myChart.assignColor("Supermarkets", "#f03b20");
+
+//        mySeries.afterDraw = function (s, d) {
+//
+////
+//            // Add some bar labels for the yValue
+//        svg.append("text")
+//                .attr("x", parseFloat(shape.attr("x")) + shape.attr("width"))
+//                .attr("y", parseFloat(shape.attr("y")) + (shape.attr("height") > 30 ? (shape.attr("height") / 2 + 8) : - 10))
+//                .style("font-family", "courier new")
+//                .style("text-anchor", "middle")
+//                .style("font-size", "16px")
+//                .style("fill", "#ecf0f1")
+//                .style("pointer-events", "none")
+//                .text(yAxis._getFormat()(d.yValue));
+//
+//        // Draw without a border
+//        shape.attr("stroke", shape.attr("fill"));
+//
+//    };
+        myChart.draw();
+    });
+
+    d3.select("#btn_all").on("click", function() {
+        d3.csv("barScoreAverage.csv", function (data) {
+            myChart.data = data;
+            myChart.draw(1000);
+        });
+//        myChart.data = [
+//            { Animal: "Cats", Value: (Math.random() * 1000000) },
+//            { Animal: "Dogs", Value: (Math.random() * 1000000) },
+//            { Animal: "Mice", Value: (Math.random() * 1000000) }
+//        ];
+//        myChart.draw(1000);
+    });
+    d3.select("#btn_math").on("click", function() {
+        d3.csv("barMathAverage.csv", function (data) {
+            myChart.data = data;
+            myChart.draw(1000);
+        });
+//        myChart.data = [
+//            { Animal: "Cats", Value: (Math.random() * 1000000) },
+//            { Animal: "Dogs", Value: (Math.random() * 1000000) },
+//            { Animal: "Mice", Value: (Math.random() * 1000000) }
+//        ];
+//        myChart.draw(1000);
+    });
+    d3.select("#btn_read").on("click", function() {
+        d3.csv("barReadAverage.csv", function (data) {
+            myChart.data = data;
+            myChart.draw(1000);
+        });
+//        myChart.data = [
+//            { Animal: "Cats", Value: (Math.random() * 1000000) },
+//            { Animal: "Dogs", Value: (Math.random() * 1000000) },
+//            { Animal: "Mice", Value: (Math.random() * 1000000) }
+//        ];
+//        myChart.draw(1000);
+    });
+    d3.select("#btn_scie").on("click", function() {
+        d3.csv("barScieAverage.csv", function (data) {
+            myChart.data = data;
+            myChart.draw(1000);
+        });
+//        myChart.data = [
+//            { Animal: "Cats", Value: (Math.random() * 1000000) },
+//            { Animal: "Dogs", Value: (Math.random() * 1000000) },
+//            { Animal: "Mice", Value: (Math.random() * 1000000) }
+//        ];
+//        myChart.draw(1000);
+    });
+
+//    d3.select('#opts')
+//            .on('change', function() {
+//                var newData = eval(d3.select(this).property('value'));
+//                updateLegend(newData);
+//            });
+
+//    svg.append("text")
+//            .attr("x", myChart._xPixels() + myChart._widthPixels() / 2)
+//            .attr("y", myChart._yPixels() - 10)
+//            .style("text-anchor", "middle")
+//            .style("font-family", "sans-serif")
+//            .style("font-size", "75%")
+//            .text("Sample Text")
+
+    window.onresize = function () {
+        // As of 1.1.0 the second parameter here allows you to draw
+        // without reprocessing data.  This saves a lot on performance
+        // when you know the data won't have changed.
+
+        myChart.draw(0, true);
+    };
+</script>
+</html>

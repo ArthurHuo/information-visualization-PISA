@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+    <title>PISA 2012 Results Visualization</title>
+
+    <!-- Google fonts -->
+    <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>-->
+    <!--<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>-->
+
+    <!-- D3.js -->
+    <script src="../d3.min.js" charset="utf-8"></script>
+
+    <style>
+        *{ margin:0; padding:0; list-style:none;}
+        img{ border:0;}
+
+        .header{ width:100%; background:#F5F5F5;margin-bottom: 10px}
+        .nav{ width:1000px; margin:0 auto; overflow:hidden;}
+        .nav ul li{ height:40px; line-height:40px; float:left; padding:10px 5px; margin:0px 5px;position:relative;}
+        .nav ul li a{ color:#666; font-family:'Microsoft Yahei'; font-size:14px; text-decoration:none;}
+        .nav ul li a:hover{ color:#000; text-decoration:none;}
+        .nav ul li span{ display:block; position:absolute; width:0px; height:0px; background:#1FAEFF; top:58px; left:50%;}
+
+        body {
+            /*font-family: 'Open Sans', sans-serif;*/
+            /*font-size: 11px;*/
+            /*font-weight: 300;*/
+            /*fill: #242424;*/
+            /*text-align: center;*/
+            /*text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;*/
+            /*cursor: default;*/
+        }
+
+        .legend {
+            font-family: 'Raleway', sans-serif;
+            fill: #333333;
+        }
+
+        .tooltip {
+            fill: #333333;
+        }
+    </style>
+
+</head>
+<body>
+<div class="header">
+    <div class="nav">
+        <ul>
+            <li><a href='../index.html'>Home</a><span></span></li>
+            <li><a href='../Map/WorldMap.html'>World Map</a><span></span></li>
+            <li><a href='../Bar/BarChart.html'>Bar Chart</a><span></span></li>
+            <li><a href='RaderChart.html'>Radar Chart</a><div style="display:block; position:absolute; width:100%; left:0;right:0;height:2px; background:#1FAEFF; top:58px; "></div></li>
+            <li><a href='../ScatterPlot/ScatterPlot.html'>Scatter Plot</a><span></span></li>
+        </ul>
+    </div>
+</div>
+
+<h1 style="margin-bottom: 10px">PISA 2012 Results Visualization - Rader Chart</h1>
+
+<div>
+    <div class="radarChart" style="width:60%;position:absolute;left:10px;"></div>
+    <div style="width:40%;position:absolute;left:60%;top:25%;text-align:left;">
+        <div style="margin-bottom: 10px;">
+            <!--<button href="javascript:allCheck('choice',true)">Select All</button>-->
+            <!--<button href="javascript:allCheck('choice',false)">Unselect All</button>-->
+            <!--<button href="javascript:reserveCheck('choice')">Invert</button>-->
+            <div>
+                Data set:
+                <select id="selectDataset" style="margin-bottom: 10px" onchange="changeDataset()">
+                    <option value="score">Score</option>
+
+                    <option value="property">Property</option>
+                    <!--<option value="skipSomeClasses">Skip Some Classes</option>-->
+                    <!--<option value="a_scie">Average Score - Science</option>-->
+                </select>
+            </div>
+
+            <button name="clear" id="clear">Clear</button>
+        </div>
+        <div style="float:left">
+            <label><input type="checkbox" name="choice" id="choice1" value=0 />Albania</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice2" value=1 />United Arab Emirates</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice3" value=2 />Argentina</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice4" value=3 />Australia</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice5" value=4 />Austria</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice6" value=5 />Belgium</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice7" value=6 />Bulgaria</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice8" value=7 />Brazil</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice9" value=8 />Canada</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice10" value=9 />Switzerland</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice11" value=10 />Chile</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice12" value=11 />Colombia</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice13" value=12 />Costa Rica</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice14" value=13 />Czech Republic</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice15" value=14 />Germany</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice16" value=15 />Denmark</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice17" value=16 />Spain</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice18" value=17 />Estonia</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice19" value=18 />Finland</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice20" value=19 />France</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice21" value=20 />United Kingdom</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice22" value=21 />Greece</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice23" value=22 />Hong Kong-China</label><p></p>
+
+        </div>
+        <div style="float:left">
+            <label><input type="checkbox" name="choice" id="choice24" value=23 />Croatia</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice25" value=24 />Hungary</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice26" value=25 />Indonesia</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice27" value=26 />Ireland</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice28" value=27 />Iceland</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice29" value=28 />Israel</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice30" value=29 />Italy</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice31" value=30 />Jordan</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice32" value=31 />Japan</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice33" value=32 />Kazakhstan</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice34" value=33 />Korea</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice35" value=34 />Liechtenstein</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice36" value=35 />Lithuania</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice37" value=36 />Luxembourg</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice38" value=37 />Latvia</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice39" value=38 />Macao-China</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice40" value=39 />Mexico</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice41" value=40 />Montenegro</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice42" value=41 />Malaysia</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice43" value=42 />Netherlands</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice44" value=43 />Norway</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice45" value=44 />New Zealand</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice46" value=45 />Peru</label><p></p>
+
+
+        </div>
+        <div style="float:left">
+            <label><input type="checkbox" name="choice" id="choice47" value=46 />Poland</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice48" value=47 />Portugal</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice49" value=48 />Qatar</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice50" value=49 />China-Shanghai</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice51" value=50 />Perm(Russian Federation)</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice52" value=51 />Florida (USA)</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice53" value=52 />Connecticut (USA)</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice54" value=53 />Massachusetts (USA)</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice55" value=54 />Romania</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice56" value=55 />Russian Federation</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice57" value=56 />Singapore</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice58" value=57 />Serbia</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice59" value=58 />Slovak Republic</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice60" value=59 />Slovenia</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice61" value=60 />Sweden</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice62" value=61 />Chinese Taipei</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice63" value=62 />Thailand</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice64" value=63 />Tunisia</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice65" value=64 />Turkey</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice66" value=65 />Uruguay</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice67" value=66 />United States of America</label><p></p>
+            <label><input type="checkbox" name="choice" id="choice68" value=67 />Vietnam</label><p></p>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<script src="../jquery.min.js"></script>
+<script src="radarChart.js"></script>
+<script src="../d3.min.js"></script>
+<script>
+    $(function(){
+        $('.nav li').hover(function(){
+            $('span',this).stop().css('height','2px');
+            $('span',this).animate({
+                left:'0',
+                width:'100%',
+                right:'0'
+            },200);
+        },function(){
+            $('span',this).stop().animate({
+                left:'50%',
+                width:'0'
+            },200);
+        });
+    });
+</script>
+<script>
+    var dataset = "score";
+    init();
+    function init() {
+        var newData = [];
+        $(document).ready(function () {
+            function testCheckbox() {
+                $("input[name='choice']").attr('disabled', true);
+                if ($("input[name='choice']:checked").length >= 5) {
+                    $("input[name='choice']:checked").attr('disabled', false);
+                } else {
+                    $("input[name='choice']").attr('disabled', false);
+                }
+                newData = [];
+                $("input[name='choice']:checked").each(function () {
+//                    newData.push([$(this).val()]);
+                    newData.unshift([$(this).val()]);
+                });
+
+                if ($("input[name='choice']:checked").length != 0) {
+//                    newData = newData.reverse();
+                    if(dataset == "score"){
+                        d3.csv("data/scorePercentage_radar.csv", function (error, csvdata) {
+                            var data = [];
+                            for (var i = 0; i < newData.length; i++) {
+                                data.unshift([{axis: "Mathematics", value: csvdata[newData[i]].Mathematics}, {
+                                    axis: "Reading",
+                                    value: csvdata[newData[i]].Reading
+                                }, {axis: "Science", value: csvdata[newData[i]].Science}]);
+                            }
+                            RadarChart(".radarChart", data, radarChartOptions);
+                        });
+                    }
+
+                    if(dataset == "property"){
+                        d3.csv("data/PhoneTVComputerAverage.csv", function (error, csvdata) {
+                            var data = [];
+                            for (var i = 0; i < newData.length; i++) {
+                                data.push([{axis: "CellularPhones", value: csvdata[newData[i]].CellularPhones}, {
+                                    axis: "Televisions",
+                                    value: csvdata[newData[i]].Televisions
+                                }, {axis: "Computers", value: csvdata[newData[i]].Computers},
+                                    {axis: "Cars", value: csvdata[newData[i]].Cars},
+                                    {axis: "RoomsWithABathOrShower", value: csvdata[newData[i]].RoomsWithABathOrShower}]);
+                            }
+                            RadarChart(".radarChart", data, radarChartOptions_property);
+                        });
+                    }
+
+
+                } else {
+                    if(dataset == "score"){
+                        var data = [[{axis: "Mathematics", value: 0}, {axis: "Reading", value: 0}, {
+                            axis: "Science",
+                            value: 0
+                        }]];
+                        RadarChart(".radarChart", data, radarChartOptions);
+                    }
+                    if(dataset == "property"){
+                        var data1 = [[{axis:"CellularPhones",value:0},{axis:"Televisions",value:0},{axis:"Computers",value:0},{axis:"Cars",value:0},{axis:"RoomsWithABathOrShower",value:0}]];
+                        RadarChart(".radarChart", data1, radarChartOptions_property);
+                    }
+
+                }
+            }
+
+            $('input[type=checkbox]').click(function () {
+                testCheckbox();
+            });
+
+            $('button[name=clear]').click(function () {
+                $("input[name='choice']").attr('checked', false);
+
+                if(dataset == "score"){
+                    var data = [[{axis: "Mathematics", value: 0}, {axis: "Reading", value: 0}, {
+                        axis: "Science",
+                        value: 0
+                    }]];
+                    RadarChart(".radarChart", data, radarChartOptions);
+                }
+
+                if(dataset == "property"){
+                    var data1 = [[{axis:"CellularPhones",value:0},{axis:"Televisions",value:0},{axis:"Computers",value:0},{axis:"Cars",value:0},{axis:"RoomsWithABathOrShower",value:0}]];
+                    RadarChart(".radarChart", data1, radarChartOptions_property);
+                }
+
+            });
+        })
+    }
+</script>
+<script>
+
+    //////////////////////////////////////////////////////////////
+    //////////////////////// Set-Up //////////////////////////////
+    //////////////////////////////////////////////////////////////
+
+    var margin = {top: 100, right: 100, bottom: 100, left: 100},
+            width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+            height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+
+    //////////////////////////////////////////////////////////////
+    ////////////////////////// Data //////////////////////////////
+    //////////////////////////////////////////////////////////////
+
+//    var data = [
+//        [//iPhone
+//            {axis:"Battery Life",value:0.22},
+//            {axis:"Brand",value:0.28},
+//            {axis:"Contract Cost",value:0.29},
+//            {axis:"Design And Quality",value:0.17},
+//            {axis:"Have Internet Connectivity",value:0.22},
+//            {axis:"Large Screen",value:0.02},
+//            {axis:"Price Of Device",value:0.21},
+//            {axis:"To Be A Smartphone",value:0.50}
+//        ],[//Samsung
+//            {axis:"Battery Life",value:0.27},
+//            {axis:"Brand",value:0.16},
+//            {axis:"Contract Cost",value:0.35},
+//            {axis:"Design And Quality",value:0.13},
+//            {axis:"Have Internet Connectivity",value:0.20},
+//            {axis:"Large Screen",value:0.13},
+//            {axis:"Price Of Device",value:0.35},
+//            {axis:"To Be A Smartphone",value:0.38}
+//        ],[//Nokia Smartphone
+//            {axis:"Battery Life",value:0.26},
+//            {axis:"Brand",value:0.10},
+//            {axis:"Contract Cost",value:0.30},
+//            {axis:"Design And Quality",value:0.14},
+//            {axis:"Have Internet Connectivity",value:0.22},
+//            {axis:"Large Screen",value:0.04},
+//            {axis:"Price Of Device",value:0.41},
+//            {axis:"To Be A Smartphone",value:0.30}
+//        ]
+//    ];
+    //////////////////////////////////////////////////////////////
+    //////////////////// Draw the Chart //////////////////////////
+    //////////////////////////////////////////////////////////////
+
+    var color = d3.scale.ordinal()
+            .range(["#EDC951","#CC333F","#00A0B0","#4daf4a","#984ea3"]);
+
+    var radarChartOptions = {
+        w: width,
+        h: height,
+        margin: margin,
+        maxValue: 0.25,
+        levels: 5,
+        roundStrokes: false,
+        color: color
+    };
+    var radarChartOptions_property = {
+        w: width,
+        h: height,
+        margin: margin,
+        maxValue: 4,
+        levels: 5,
+        roundStrokes: false,
+        color: color
+    };
+
+    var myChart;
+
+//    d3.csv("data/scorePercentage_radar.csv", function(error, csvdata) {
+        var data=[];
+//        for(var i = 0; i < 1;i++){
+//            data.push([{axis:"Mathematics",value:csvdata[i].Mathematics},{axis:"Reading",value:csvdata[i].Reading},{axis:"Science",value:csvdata[i].Science}]);
+//        }
+       data = [[{axis:"Mathematics",value:0},{axis:"Reading",value:0},{axis:"Science",value:0}]];
+//        data.push([{axis:"Battery Life",value:0.26},{axis:"Battery Life",value:0.26},{axis:"Battery Life",value:0.26}]);
+        myChart = RadarChart(".radarChart",data , radarChartOptions);
+
+//        });
+
+    //Call function to draw the Radar chart
+//    RadarChart(".radarChart", data, radarChartOptions);
+
+
+    function changeDataset(){
+        var objS = document.getElementById("selectDataset");
+        var op = objS.options[objS.selectedIndex].value;
+        if(op == "score"){
+//            x_lateForSchool();
+//            removeMap();
+//            showAverage("map");
+            $("input[name='choice']").attr('checked', false);
+            dataset = "score";
+            var data = [[{axis: "Mathematics", value: 0}, {axis: "Reading", value: 0}, {
+                axis: "Science",
+                value: 0
+            }]];
+            RadarChart(".radarChart", data, radarChartOptions);
+
+        }else if(op == "property"){
+            $("input[name='choice']").attr('checked', false);
+            dataset = "property";
+//            d3.csv("data/PhoneTVComputerAverage.csv", function(error, csvdata) {
+           var data1 = [[{axis:"CellularPhones",value:0},{axis:"Televisions",value:0},{axis:"Computers",value:0},{axis:"Cars",value:0},{axis:"RoomsWithABathOrShower",value:0}]];
+           myChart = RadarChart(".radarChart", data1, radarChartOptions_property);
+//            });
+
+//            x_skipWholeDay();
+        }else if(op =="skipSomeClasses"){
+//            x_skipSomeClasses();
+//            removeMap();
+//            showDetailAverage(op);
+        }else if(op == "a_read"){
+//            removeMap();
+//            showDetailAverage(op);
+        }else if(op == "a_scie"){
+//            removeMap();
+//            showDetailAverage(op);
+        }
+    }
+</script>
+<script>
+    var w = 500,
+            h = 500;
+
+    var colorscale = d3.scale.category10();
+    var LegendOptions = ['Albania','Austria'];
+    var svg = d3.select('#body')
+            .selectAll('svg')
+            .append('svg')
+            .attr("width", w+300)
+            .attr("height", h)
+
+    //Create the title for the legend
+    var text = svg.append("text")
+            .attr("class", "title")
+            .attr('transform', 'translate(90,0)')
+            .attr("x", w - 70)
+            .attr("y", 10)
+            .attr("font-size", "12px")
+            .attr("fill", "#404040")
+            .text("What % of owners use a specific service in a week");
+
+    //Initiate Legend
+    var legend = svg.append("g")
+                    .attr("class", "legend")
+                    .attr("height", 100)
+                    .attr("width", 200)
+                    .attr('transform', 'translate(90,20)')
+            ;
+    //Create colour squares
+    legend.selectAll('rect')
+            .data(LegendOptions)
+            .enter()
+            .append("rect")
+            .attr("x", w - 65)
+            .attr("y", function(d, i){ return i * 20;})
+            .attr("width", 10)
+            .attr("height", 10)
+            .style("fill", function(d, i){ return colorscale(i);})
+    ;
+    //Create text next to squares
+    legend.selectAll('text')
+            .data(LegendOptions)
+            .enter()
+            .append("text")
+            .attr("x", w - 52)
+            .attr("y", function(d, i){ return i * 20 + 9;})
+            .attr("font-size", "11px")
+            .attr("fill", "#737373")
+            .text(function(d) { return d; })
+    ;
+
+</script>
+</body>
+</html>

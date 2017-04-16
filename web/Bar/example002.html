@@ -1,0 +1,22 @@
+<html>
+<div id="chartContainer">
+    <script src="file:///E:/Java/IDEAworkspace/SWEN439/web/d3.min.js"></script>
+    <script src="dimple.v2.1.6.min.js"></script>
+    <script type="text/javascript">
+        var svg = dimple.newSvg("#chartContainer", 1000, 8000);
+        d3.tsv("example_data.tsv", function (data) {
+            var myChart = new dimple.chart(svg, data);
+            myChart.setBounds(75, 30, 800, 600)
+            myChart.addMeasureAxis("x", "Unit Sales");
+            var y = myChart.addCategoryAxis("y", "Month");
+            y.addOrderRule("Date");
+            myChart.addSeries("Channel", dimple.plot.bar);
+            myChart.addLegend(60, 10, 510, 20, "right");
+//            myChart.assignColor("#2ca25f","#f03b20","#756bb1","#d95f0e");
+            myChart.assignColor("Hypermarkets", "#2ca25f");
+            myChart.assignColor("Supermarkets", "#f03b20");
+            myChart.draw();
+        });
+    </script>
+</div>
+</html>

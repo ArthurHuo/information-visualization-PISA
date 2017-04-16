@@ -1,0 +1,205 @@
+country,Channel,average_score
+Albania,Mathematics,7.28
+United Arab Emirates,Mathematics,9.45
+Argentina,Mathematics,7.51
+Australia,Mathematics,12.54
+Austria,Mathematics,13.32
+Belgium,Mathematics,14.07
+Bulgaria,Mathematics,10.18
+Brazil,Mathematics,6.63
+Canada,Mathematics,13.45
+Switzerland,Mathematics,14.17
+Chile,Mathematics,10.07
+Colombia,Mathematics,6.91
+Costa Rica,Mathematics,7.51
+Czech Republic,Mathematics,14.11
+Germany,Mathematics,13.55
+Denmark,Mathematics,12.01
+Spain,Mathematics,12.71
+Estonia,Mathematics,14.39
+Finland,Mathematics,13.34
+France,Mathematics,12.81
+United Kingdom,Mathematics,12.34
+Greece,Mathematics,10.22
+Hong Kong-China,Mathematics,16.31
+Croatia,Mathematics,11.17
+Hungary,Mathematics,12.07
+Indonesia,Mathematics,5.99
+Ireland,Mathematics,12.97
+Iceland,Mathematics,12.60
+Israel,Mathematics,11.31
+Italy,Mathematics,12.57
+Jordan,Mathematics,6.51
+Japan,Mathematics,15.21
+Kazakhstan,Mathematics,9.28
+Korea,Mathematics,16.28
+Liechtenstein,Mathematics,15.50
+Lithuania,Mathematics,11.72
+Luxembourg,Mathematics,12.39
+Latvia,Mathematics,12.72
+Macao-China,Mathematics,15.34
+Mexico,Mathematics,8.53
+Montenegro,Mathematics,7.60
+Malaysia,Mathematics,8.35
+Netherlands,Mathematics,14.16
+Norway,Mathematics,12.25
+New Zealand,Mathematics,12.98
+Peru,Mathematics,6.12
+Poland,Mathematics,14.24
+Portugal,Mathematics,11.94
+Qatar,Mathematics,6.47
+China-Shanghai,Mathematics,19.69
+Perm(Russian Federation),Mathematics,12.09
+Florida (USA),Mathematics,10.79
+Connecticut (USA),Mathematics,13.14
+Massachusetts (USA),Mathematics,13.40
+Romania,Mathematics,10.25
+Russian Federation,Mathematics,12.04
+Singapore,Mathematics,17.10
+Serbia,Mathematics,10.31
+Slovak Republic,Mathematics,12.13
+Slovenia,Mathematics,11.88
+Sweden,Mathematics,11.58
+Chinese Taipei,Mathematics,16.43
+Thailand,Mathematics,9.50
+Tunisia,Mathematics,7.03
+Turkey,Mathematics,9.93
+Uruguay,Mathematics,8.28
+United States of America,Mathematics,11.94
+Vietnam,Mathematics,14.16
+Albania,Reading,5.26
+United Arab Emirates,Reading,6.41
+Argentina,Reading,5.46
+Australia,Reading,8.17
+Austria,Reading,7.96
+Belgium,Reading,8.35
+Bulgaria,Reading,6.59
+Brazil,Reading,5.24
+Canada,Reading,8.50
+Switzerland,Reading,8.11
+Chile,Reading,6.99
+Colombia,Reading,5.60
+Costa Rica,Reading,6.31
+Czech Republic,Reading,8.55
+Germany,Reading,8.32
+Denmark,Reading,7.76
+Spain,Reading,8.03
+Estonia,Reading,8.67
+Finland,Reading,7.88
+France,Reading,8.40
+United Kingdom,Reading,8.18
+Greece,Reading,7.43
+Hong Kong-China,Reading,9.16
+Croatia,Reading,7.76
+Hungary,Reading,8.03
+Indonesia,Reading,5.14
+Ireland,Reading,8.82
+Iceland,Reading,7.26
+Israel,Reading,7.67
+Italy,Reading,8.05
+Jordan,Reading,5.26
+Japan,Reading,9.18
+Kazakhstan,Reading,5.16
+Korea,Reading,9.27
+Liechtenstein,Reading,8.73
+Lithuania,Reading,7.59
+Luxembourg,Reading,7.81
+Latvia,Reading,8.11
+Macao-China,Reading,8.52
+Mexico,Reading,6.12
+Montenegro,Reading,5.90
+Malaysia,Reading,5.35
+Netherlands,Reading,8.31
+Norway,Reading,8.27
+New Zealand,Reading,8.66
+Peru,Reading,4.85
+Poland,Reading,8.77
+Portugal,Reading,7.80
+Qatar,Reading,5.11
+China-Shanghai,Reading,10.06
+Perm(Russian Federation),Reading,7.75
+Florida (USA),Reading,8.01
+Connecticut (USA),Reading,8.78
+Massachusetts (USA),Reading,8.82
+Romania,Reading,6.38
+Russian Federation,Reading,7.40
+Singapore,Reading,9.09
+Serbia,Reading,6.61
+Slovak Republic,Reading,7.28
+Slovenia,Reading,7.16
+Sweden,Reading,7.73
+Chinese Taipei,Reading,8.85
+Thailand,Reading,6.83
+Tunisia,Reading,5.40
+Turkey,Reading,7.55
+Uruguay,Reading,5.67
+United States of America,Reading,8.16
+Vietnam,Reading,8.33
+Albania,Science,5.53
+United Arab Emirates,Science,7.05
+Argentina,Science,5.85
+Australia,Science,9.44
+Austria,Science,9.24
+Belgium,Science,9.23
+Bulgaria,Science,7.33
+Brazil,Science,5.13
+Canada,Science,9.49
+Switzerland,Science,9.07
+Chile,Science,7.70
+Colombia,Science,5.60
+Costa Rica,Science,6.24
+Czech Republic,Science,9.93
+Germany,Science,9.71
+Denmark,Science,8.41
+Spain,Science,9.12
+Estonia,Science,10.43
+Finland,Science,10.00
+France,Science,9.03
+United Kingdom,Science,9.37
+Greece,Science,7.85
+Hong Kong-China,Science,10.78
+Croatia,Science,8.61
+Hungary,Science,8.99
+Indonesia,Science,4.84
+Ireland,Science,9.85
+Iceland,Science,8.19
+Israel,Science,7.98
+Italy,Science,8.93
+Jordan,Science,5.64
+Japan,Science,10.67
+Kazakhstan,Science,6.34
+Korea,Science,10.42
+Liechtenstein,Science,9.69
+Lithuania,Science,8.83
+Luxembourg,Science,8.61
+Latvia,Science,9.16
+Macao-China,Science,9.76
+Mexico,Science,5.96
+Montenegro,Science,5.73
+Malaysia,Science,6.12
+Netherlands,Science,9.51
+Norway,Science,8.73
+New Zealand,Science,9.60
+Peru,Science,4.61
+Poland,Science,9.84
+Portugal,Science,8.52
+Qatar,Science,5.13
+China-Shanghai,Science,11.74
+Perm(Russian Federation),Science,8.28
+Florida (USA),Science,8.46
+Connecticut (USA),Science,9.51
+Massachusetts (USA),Science,9.58
+Romania,Science,6.72
+Russian Federation,Science,8.39
+Singapore,Science,10.59
+Serbia,Science,6.91
+Slovak Republic,Science,8.16
+Slovenia,Science,8.80
+Sweden,Science,8.55
+Chinese Taipei,Science,9.89
+Thailand,Science,7.46
+Tunisia,Science,5.30
+Turkey,Science,7.68
+Uruguay,Science,6.14
+United States of America,Science,8.74
+Vietnam,Science,10.13
