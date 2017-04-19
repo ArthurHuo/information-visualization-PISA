@@ -4,6 +4,8 @@ A web-based big data visualization system.
 
 This project developed a web-based big data visualization system. This project developed several online dynamic web pages showing different kinds of interactive charts. HTML, Java and JavaScript were used in this project.
 
+Screenshots:
+
 ![image](https://github.com/ArthurHuo/information-visualization-PISA/raw/master/images/01.png)
 
 ![image](https://github.com/ArthurHuo/information-visualization-PISA/raw/master/images/02.png)
